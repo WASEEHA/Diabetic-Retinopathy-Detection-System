@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image-Upload</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url("https://drranimenon.com/wp-content/uploads/2022/09/Group-1882@2x.png");
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+            color: black;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container-fluid {
+            height: 100vh; /* Makes container full height of the viewport */
+    display: flex;
+    justify-content: center; /* Centers the content horizontally */
+    align-items: center; /* Centers the content vertically */
+    padding: 0; /* Remove any padding */
+
+
+        }
+
+        /* .col-3 {
+            background-color: rgba(0,0,0,0.1);
+            position: relative;
+            height: 100vh;
+            width: 20%;
+            border-radius: 30px;
+            top: 23px;
+            border-style: inset;
+            left: 5px;
+            
+        } */
+        .col-9 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex: 1;
+            left: 170px;
+            top: -50px;
+            /* width: 50%; */
+
+        }
+
+        .rounded-box {
+            background-color: rgba(255, 255, 255, 0.9); /* White background with slight opacity */
+    padding: 30px;
+    border-radius: 15px; /* Smoother corners */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+    max-width: 800px;
+    width: 900%; /* Ensures it takes 90% of the viewport width */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center-align content */
+    text-align: center; /* Center-align text */
+    gap: 20px; /* Space between children */
+    height: auto; /* Allow height to adjust according to content */
+    /* margin-left: 20px; */
+    margin-right: 150px;
+    margin-top: 50px;
+}
+
+.form-container h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #4a4a4a; /* Dark gray for a modern look */
+}
+
+.form-container p {
+    font-size: 16px;
+    color: #666; /* Subtle gray for secondary text */
+}
+
+.form-group label {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333; /* Darker gray for better visibility */
+}
+
+.form-group input {
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    transition: border-color 0.3s ease; /* Smooth transition on focus */
+}
+
+.form-group input:focus {
+    border-color: #6a11cb; /* Purple border on focus */
+    outline: none; /* Removes default outline */
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.5); /* Subtle glow */
+}
+.btn-group {
+    display: flex; /* Ensures buttons align horizontally */
+    gap: 20px; /* Adds a gap between buttons */
+    justify-content: center; /* Centers the buttons */
+}
+
+
+.btn-group button, .btn-group a {
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Modern gradient button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none; /* Removes underline for links */
+    display: inline-block;
+}
+
+.btn-group button:hover, .btn-group a:hover {
+    transform: translateY(-2px); /* Slight pop effect */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+.preview-container img {
+    max-width: 100%;
+    max-height: 300px; /* Increased size for better visibility */
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Better shadow effect */
+}
+
+.error-message {
+    margin-top: 20px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    display: none;
+}
+
+.navbar {
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
+    padding: 10px 20px; /* Adds padding around the navbar */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.navbar:hover {
+    background: linear-gradient(to right, #2575fc, #6a11cb); /* Reverses gradient on hover */
+}
+
+.navbody {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between left and right content */
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    padding-right: 700px;
+}
+
+.left a {
+    font-size: 40px;
+    font-weight: bold;
+    color: white; /* White text for contrast */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Adds shadow to text */
+    text-decoration: none; /* Removes underline */
+    transition: color 0.3s ease; /* Smooth color change on hover */
+}
+
+.left a:hover {
+    color: #ffd700; /* Gold color for hover effect */
+}
+
+.right {
+    display: flex;
+    gap: 30px; /* Adds space between the links */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.right li a {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 15px; /* Adds padding around links */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effects */
+}
+
+.right li a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Adds a translucent hover effect */
+    color: #ffd700; /* Gold text on hover */
+}
+
+
+
+body {
+    background-image: url("https://drranimenon.com/wp-content/uploads/2022/09/Group-1882@2x.png");
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    color: black;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden; /* Prevents scroll */
+}
+
+header{
+    padding-right: 100px;
+}
+    </style>
+</head>
+
+<body>
+    <header class="hheader">
+        <nav>
+            <b><a href="#" style="font-size: 64px; ">DR Detector</a></b>
+        </nav>
+    </header>
+
+    <nav class="navbar">
+        <div class="navbody">
+            <!-- Left Side - DR Detector -->
+            <div class="left">
+                <a href="#">DR Detector</a>
+            </div>
+    
+            <!-- Right Side - Links -->
+            <ul class="right">
+                <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li><a href="/about">About Diabetic Retinopathy</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <!-- <div class="col-3">
+                <h2 style="text-align: center; color: white; padding-top: 5px; display :flex;">Diabetic Retinopathy</h2>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link text-white" href="/logout">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/about">About Diabetic Retinopathy</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/contact">Contact Us</a></li>
+                </ul>
+                
+                
+            </div> -->
+
+
+            <!-- <div class="col-9 d-flex justify-content-center align-items-center">
+                <div class="rounded-box">
+                    <div class="form-container">
+                        <h2 class="form-title">Retinal Scanned Image Uploader</h2>
+                        <p>The image uploaded must be clear and medically done and tested for further run through our
+                            algorithm.</p> -->
+                        <!-- <form method="post" enctype="multipart/form-data" action="/upload">
+                            <div class="form-group">
+                                <label for="image">Upload the Retinal Scanned Image:</label>
+                                <input type="file" class="form-control-file" id="image" name="image" accept="image/*"
+                                    onchange="showPreview(event);">
+                            </div>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-primary">Predict</button>
+                                <a href="/statistics" class="btn btn-secondary">Show Statistics</a>
+                            </div>
+                        </form>
+                        <div class="error-message" id="error-msg">
+                            ERROR: please upload correct retinal image in supported format.
+                        </div>
+                    </div>
+                    <div class="preview-container">
+                        <div id="image-preview-container" style="display: none;">
+                            <img id="image-preview" src="#" alt="Image Preview">
+                        </div>
+                    </div>
+                </div>
+            </div> --> 
+
+            <div class="col-9 d-flex justify-content-center align-items-center">
+                <div class="rounded-box">
+                    <div class="form-container">
+                        <h2 class="form-title">Retinal Scanned Image Uploader</h2>
+                        <p>Upload a clear retinal scan for analysis using our advanced algorithm.</p>
+                        <form method="post" enctype="multipart/form-data" action="/upload">
+                            <div class="form-group">
+                                <label for="image">Upload Retinal Scan:</label>
+                                <input type="file" class="form-control-file" id="image" name="image" accept="image/*"
+                                    onchange="showPreview(event);">
+                            </div>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-primary">Predict</button>
+                                <a href="/statistics" class="btn btn-secondary">View Statistics</a>
+                            </div>
+                            
+                        </form>
+                        <div class="error-message" id="error-msg">
+                            ERROR: Please upload a correct retinal image in a supported format.
+                        </div>
+                    </div>
+                    <div class="preview-container">
+                        <div id="image-preview-container" style="display: none;">
+                            <img id="image-preview" src="#" alt="Image Preview">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function showPreview(event) {
+            if (event.target.files.length > 0) {
+                var src = URL.createObjectURL(event.target.files[0]);
+                var previewContainer = document.getElementById("image-preview-container");
+                var previewImage = document.getElementById("image-preview");
+                previewImage.src = src;
+                previewContainer.style.display = "block";
+            }
+        }
+    </script>
+</body>
+
+</html>

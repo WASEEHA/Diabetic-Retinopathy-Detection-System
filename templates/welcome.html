@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DR-Detector-Welcome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for the About Diabetic Retinopathy page */
+        body {
+            background-image: url("https://drranimenon.com/wp-content/uploads/2022/09/Group-1882@2x.png");
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+            color: black;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+/*
+        #left-part {
+            background-color: #343a40; 
+            color: white;
+            width: 20%;
+            height: 100vh; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto; 
+            padding: 20px;
+        }
+        #left-part h2 {
+            margin-bottom: 20px;
+        }
+        #left-part ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #left-part ul li {
+            margin-bottom: 10px;
+        }
+        #left-part ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        #left-part ul li a:hover {
+            color: #dcdcdc; 
+        }*/
+        #right-part {
+            margin-left: 0%; 
+            padding: 50px;
+            
+        }
+        #right-part .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #right-part h2 {
+            margin-bottom: 20px;
+            color: #343a40; 
+        }
+        #right-part p {
+            line-height: 1.6;
+            color: #666;
+        } 
+ 
+        .navbar {
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
+    padding: 10px 20px; /* Adds padding around the navbar */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.navbar:hover {
+    background: linear-gradient(to right, #2575fc, #6a11cb); /* Reverses gradient on hover */
+}
+
+.navbody {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+     /* Space between left and right content */
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    padding-right: 700px;
+}
+
+.left a {
+    font-size: 40px;
+    font-weight: bold;
+    color: white; /* White text for contrast */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Adds shadow to text */
+    text-decoration: none; /* Removes underline */
+    transition: color 0.3s ease; /* Smooth color change on hover */
+}
+
+.left a:hover {
+    color: #ffd700; /* Gold color for hover effect */
+}
+
+.right {
+    display: flex;
+    gap: 30px; /* Adds space between the links */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.right li a {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 8px; /* Adds padding around links */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effects */
+}
+
+.right li a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Adds a translucent hover effect */
+    color: #ffd700; /* Gold text on hover */
+}
+        
+            
+     
+    </style>
+</head>
+<body>
+    
+<!-- <div id="left-part">
+    <h2>Diabetic Retinopathy</h2>
+    <ul>
+        <li><a href="/logout">Logout</a></li>
+        <li><a href="/home">Upload</a></li>
+        <li><a href="/about">About Diabetic Retinopathy</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+    </ul>
+</div> -->
+
+<!-- <header class="hheader">
+    <nav>
+        <b><a href="#" style="font-size: 64px; ">DR Detector</a></b>
+    </nav>
+</header> -->
+
+<nav class="navbar">
+    <div class="navbody">
+        <!-- Left Side - DR Detector -->
+        <div class="left">
+            <a href="#">DR Detector</a>
+        </div>
+
+        <!-- Right Side - Links -->
+        <ul class="right">
+            <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a href="/home">Upload</a></li>
+            <li><a href="/about">About Diabetic Retinopathy</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+            <!-- <li><a href="/home">Upload</a></li> -->
+        </ul>
+    </div>
+</nav>
+<div id="right-part">
+    <div class="container">
+        <h2>Welcome to Diabetic Retinopathy Detector</h2>
+        <p>Explore information about Diabetic Retinopathy.</p>
+    </div>
+</div>
+
+</body>
+</html>
